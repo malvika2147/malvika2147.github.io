@@ -9,18 +9,25 @@
     :root {
       --bg: #272822;
       --panel: #2d2e29;
+      --bib-bg: #3b3b2f;
+      --bib-border: var(--border);
+      --bib-left-border: var(--accent);
       --text: #f3f3ec;
       --muted: #c8c8bd;
       --subtle: #9d9d92;
       --link: #8fbfff;
-      --accent: #fd971f;
+      --accent: #ec9020;
       --border: #55554c;
       --max-width: 860px;
+      --meta-font-size: 0.95rem;
     }
 
     body.light-mode {
       --bg: #f7f6f1;
       --panel: #ece9df;
+      --bib-bg: #ece9df;
+      --bib-border: var(--border);
+      --bib-left-border: var(--accent);
       --text: #222222;
       --muted: #55524a;
       --subtle: #6f6a60;
@@ -49,13 +56,11 @@
 
     strong.me {
       color: var(--text);
-      text-decoration: underline;
-      text-decoration-color: var(--text);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
+      text-decoration: none;
       font-weight: 400;
     }
-.wrap {
+
+    .wrap {
       width: min(var(--max-width), calc(100% - 2rem));
       margin: 0 auto;
       padding: 3rem 0 4rem;
@@ -122,6 +127,24 @@
       font-size: 0.95rem;
     }
 
+    .top-links a {
+      color: var(--accent);
+    }
+
+    .top-links a:hover {
+      color: var(--text);
+    }
+
+    .top-links a,
+    .top-email {
+      text-shadow: 0 0.04rem 0.08rem rgba(0, 0, 0, 0.45);
+    }
+
+    body.light-mode .top-links a,
+    body.light-mode .top-email {
+      text-shadow: 0 0.04rem 0.08rem rgba(0, 0, 0, 0.18);
+    }
+
     .separator {
       width: 1px;
       height: 1.1rem;
@@ -149,20 +172,157 @@
 
     .paper-title, .role-title { font-weight: 600; }
 
+    .author-link {
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: var(--text);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .author-link:hover {
+      color: var(--link);
+      text-decoration-color: var(--link);
+    }
+
+    .paper-actions {
+      display: block;
+      margin-top: 0.15rem;
+      color: var(--subtle);
+      font-size: var(--meta-font-size);
+    }
+
+    .paper-actions.inline {
+      display: inline;
+      margin-top: 0;
+      margin-left: 0.35rem;
+      vertical-align: baseline;
+    }
+
+    .paper-actions a,
+    .paper-actions summary {
+      color: var(--link);
+      text-decoration: none;
+      font: inherit;
+      font-size: inherit;
+    }
+
+    .paper-actions a:hover,
+    .paper-actions summary:hover {
+      color: var(--text);
+    }
+
+    .paper-actions > a:not(:first-child)::before,
+    .paper-actions > details.bibtex:not(:first-child) > summary::before {
+      content: "|";
+      color: var(--border);
+      opacity: 0.55;
+      margin: 0 1.6rem;
+      text-shadow: 0.035em 0 0 currentColor, -0.035em 0 0 currentColor;
+    }
+
+    .bibtex {
+      display: inline;
+      margin: 0;
+      padding: 0;
+      font-size: inherit;
+    }
+
+    .bibtex summary {
+      cursor: pointer;
+      list-style: none;
+      display: inline;
+      white-space: nowrap;
+      color: var(--link);
+      text-decoration: none;
+      font: inherit;
+      font-size: inherit;
+    }
+
+    .bibtex summary:hover {
+      color: var(--text);
+    }
+
+    .bibtex[open] > summary {
+      color: var(--accent);
+    }
+
+    .bibtex[open] > summary:hover {
+      color: var(--accent);
+    }
+
+    .bibtex summary::marker {
+      content: "";
+    }
+
+    .bibtex summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .bibtex pre {
+      display: block;
+      width: 100%;
+      max-width: min(100%, calc(100vw - 2rem));
+      margin: 0.65rem 0 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--bib-border);
+      border-left: 3px solid var(--bib-left-border);
+      border-radius: 0.45rem;
+      background: var(--bib-bg);
+      color: var(--muted);
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      tab-size: 2;
+      white-space: pre;
+      box-shadow: 0 0.35rem 1.2rem rgba(0, 0, 0, 0.12);
+      cursor: text;
+      user-select: auto;
+    }
+
+    .bibtex pre:focus {
+      outline: 1px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .unavailable-link {
+      cursor: default;
+    }
+
     .meta {
       color: var(--subtle);
-      font-size: 0.95rem;
+      font-size: var(--meta-font-size);
+    }
+
+    .pub-meta {
+      font-style: italic;
+    }
+
+    .meta-link {
+      font-size: var(--meta-font-size);
     }
 
     .thesis-line {
       display: inline-block;
       margin-top: 0.15rem;
       color: var(--subtle);
-      font-size: 0.95rem;
+      font-size: var(--meta-font-size);
+    }
+
+    .thesis-label {
+      font-style: italic;
     }
 
     .thesis-line a {
       color: var(--link);
+      font-size: inherit;
+    }
+
+    .thesis-line a:hover {
+      color: var(--text);
     }
 
     .theme-toggle {
@@ -196,9 +356,9 @@
     <div class="hero">
       <h1>Malvika Raj Joshi</h1>
       <div class="top-links">
-        <a href="cv.pdf" download="MalvikaJoshi_CV_2026.pdf">Download CV</a>
+        <a href="cv.pdf" target="_blank" rel="noopener" download="MalvikaJoshi_CV_2026.pdf">Download CV</a>
         <span class="separator" aria-hidden="true"></span>
-        <span>malvika [at] berkeley [dot] edu</span>
+        <span class="top-email">malvika [at] berkeley [dot] edu</span>
         <span class="separator" aria-hidden="true"></span>
         <a href="#publications">Publications</a>
       </div>
@@ -218,7 +378,7 @@
         </p>
         <p>
         Before starting my Ph.D. at Berkeley, I completed my Master's at Massachusetts Institute of Technology (MIT), where I was advised by <a href="https://web.mit.edu/aram/www/" target="_blank" rel="noopener">Aram Harrow</a>.<br>
-          <span class="thesis-line">Thesis:
+          <span class="thesis-line"><span class="thesis-label">Thesis:</span>
           <a href="https://dspace.mit.edu/handle/1721.1/139268" target="_blank" rel="noopener">Pretending to be Quantum: A Study of IQP-Based Tests of Quantumness</a>.</span>
         </p>
         <p>
@@ -231,51 +391,132 @@
         <ul>
           <li>
             <span class="paper-title">Parity&nbsp;&notin;&nbsp;QAC<sup>0</sup> iff QAC<sup>0</sup> is Fourier-Concentrated</span><br />
-            Lucas Gretta, Meghal Gupta, and <strong class="me">Malvika Raj Joshi</strong>.<br />
-            <span class="meta">2026.</span> <a href="https://arxiv.org/abs/2604.02793" target="_blank" rel="noopener">arXiv preprint</a>
+            <a class="author-link" href="https://dblp.org/pid/342/7379.html" target="_blank" rel="noopener">Lucas Gretta</a>, <a class="author-link" href="https://www.meghalgupta.com/" target="_blank" rel="noopener">Meghal Gupta</a>, and <strong class="me">Malvika Raj Joshi</strong>.<br />
+            <span class="meta pub-meta">2026.</span> <div class="paper-actions inline"><a href="https://arxiv.org/abs/2604.02793" target="_blank" rel="noopener">arXiv</a> <details class="bibtex">
+              <summary>BibTeX</summary>
+              <pre>@misc{gretta2026paritynotinqac0iff,
+      title={Parity $\notin$ QAC0 $\iff$ QAC0 is Fourier-Concentrated}, 
+      author={Lucas Gretta and Meghal Gupta and Malvika Raj Joshi},
+      year={2026},
+      eprint={2604.02793},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/2604.02793}, 
+}</pre>
+            </details></div>
           </li>
           <li>
             <span class="paper-title">Super-Constant Weight Dicke States in Constant Depth Without Fanout</span><br />
-            Lucas Gretta, Meghal Gupta, and <strong class="me">Malvika Raj Joshi</strong>.<br />
-            <span class="meta">2026.</span> <a href="https://arxiv.org/abs/2604.15298" target="_blank" rel="noopener">arXiv preprint</a>
+            <a class="author-link" href="https://dblp.org/pid/342/7379.html" target="_blank" rel="noopener">Lucas Gretta</a>, <a class="author-link" href="https://www.meghalgupta.com/" target="_blank" rel="noopener">Meghal Gupta</a>, and <strong class="me">Malvika Raj Joshi</strong>.<br />
+            <span class="meta pub-meta">2026.</span> <div class="paper-actions inline"><a href="https://arxiv.org/abs/2604.15298" target="_blank" rel="noopener">arXiv</a> <details class="bibtex">
+              <summary>BibTeX</summary>
+              <pre>@misc{gretta2026superconstantweightdickestates,
+      title={Super-Constant Weight Dicke States in Constant Depth Without Fanout}, 
+      author={Lucas Gretta and Meghal Gupta and Malvika Raj Joshi},
+      year={2026},
+      eprint={2604.15298},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/2604.15298}, 
+}</pre>
+            </details></div>
           </li>
           <li>
             <span class="paper-title">Improved Lower Bounds for QAC<sup>0</sup></span><br />
-            <strong class="me">Malvika Raj Joshi</strong>, Avishay Tal, Francisca Vasconcelos, and John Wright.<br />
-            <span class="meta">In 58th Annual ACM Symposium on Theory of Computing (STOC), 2026.</span>
-            <a href="https://arxiv.org/abs/2512.14643" target="_blank" rel="noopener">arXiv</a>
+            <strong class="me">Malvika Raj Joshi</strong>, <a class="author-link" href="https://www.avishaytal.org/" target="_blank" rel="noopener">Avishay Tal</a>, <a class="author-link" href="https://franciscavasconcelos.github.io/" target="_blank" rel="noopener">Francisca Vasconcelos</a>, and <a class="author-link" href="https://people.eecs.berkeley.edu/~jswright/" target="_blank" rel="noopener">John Wright</a>.<br />
+            <span class="meta pub-meta">In 58th Annual ACM Symposium on Theory of Computing (STOC), 2026.</span>
+            <div class="paper-actions">
+              <a href="https://dl.acm.org/doi/10.1145/3798129.3800922" target="_blank" rel="noopener">Proceedings</a>
+              <a href="https://arxiv.org/abs/2512.14643" target="_blank" rel="noopener">arXiv</a>
+              <a href="media/qac0_depth3_stoc2026.pdf" target="_blank" rel="noopener">Slides</a>
+              <a href="#" class="unavailable-link">Video</a>
+              <details class="bibtex">
+                <summary>BibTeX</summary>
+                <pre>@inproceedings{joshi2026improvedlowerboundsqac0,
+author = {Joshi, Malvika Raj and Tal, Avishay and Vasconcelos, Francisca and Wright, John},
+title = {Improved Lower Bounds for QAC0},
+year = {2026},
+isbn = {9798400725364},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3798129.3800922},
+doi = {10.1145/3798129.3800922},
+booktitle = {Proceedings of the 58th Annual ACM Symposium on Theory of Computing},
+pages = {2199–2209},
+numpages = {11},
+keywords = {QAC0, analysis of Boolean functions, quantum circuit complexity},
+location = {Salt Lake City, UT, USA},
+series = {STOC '26}
+}</pre>
+              </details>
+            </div>
           </li>
           <li>
             <span class="paper-title">Constant-Depth Unitary Preparation of Dicke States</span><br>
-            <strong class="me">Malvika Raj Joshi</strong> and Francisca Vasconcelos.<br>
-            <span class="meta">2026.</span> <a href="https://arxiv.org/abs/2601.10693" target="_blank" rel="noopener">arXiv preprint</a>
+            <strong class="me">Malvika Raj Joshi</strong> and <a class="author-link" href="https://franciscavasconcelos.github.io/" target="_blank" rel="noopener">Francisca Vasconcelos</a>.<br>
+            <span class="meta pub-meta">2026.</span> <div class="paper-actions inline"><a href="https://arxiv.org/abs/2601.10693" target="_blank" rel="noopener">arXiv</a> <details class="bibtex">
+              <summary>BibTeX</summary>
+              <pre>@misc{joshi2026constantdepthunitarypreparationdicke,
+      title={Constant-Depth Unitary Preparation of Dicke States}, 
+      author={Malvika Raj Joshi and Francisca Vasconcelos},
+      year={2026},
+      eprint={2601.10693},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/2601.10693}, 
+}</pre>
+            </details></div>
           </li>
           <li>
             <span class="paper-title">Improved Merlin–Arthur Protocols for Central Problems in Fine-Grained Complexity</span><br>
-            Shyan Akmal, Lijie Chen, Ce Jin, <strong class="me">Malvika Raj</strong>, and Ryan Williams.<br>
-            <span class="meta">In 13th Innovations in Theoretical Computer Science Conference (ITCS), 2022.</span>
-            <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2022.3" target="_blank" rel="noopener">Proceedings</a>,
-            <a href="https://eccc.weizmann.ac.il/report/2021/165/" target="_blank" rel="noopener">ECCC</a>
+            <a class="author-link" href="https://naysh.github.io/" target="_blank" rel="noopener">Shyan Akmal</a>, <a class="author-link" href="https://chen-lijie.github.io/" target="_blank" rel="noopener">Lijie Chen</a>, <a class="author-link" href="https://ce-jin.github.io/" target="_blank" rel="noopener">Ce Jin</a>, <strong class="me">Malvika Raj</strong>, and <a class="author-link" href="https://people.csail.mit.edu/rrw/" target="_blank" rel="noopener">Ryan Williams</a>.<br>
+            <span class="meta pub-meta">In 13th Innovations in Theoretical Computer Science Conference (ITCS), 2022.</span>
+            <div class="paper-actions">
+              <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2022.3" target="_blank" rel="noopener">Proceedings</a>
+              <a href="https://eccc.weizmann.ac.il/report/2021/165/" target="_blank" rel="noopener">ECCC</a>
+              <details class="bibtex">
+                <summary>BibTeX</summary>
+                <pre>@InProceedings{akmal_et_al:LIPIcs.ITCS.2022.3,
+  author =	{Akmal, Shyan and Chen, Lijie and Jin, Ce and Raj, Malvika and Williams, Ryan},
+  title =	{{Improved Merlin-Arthur Protocols for Central Problems in Fine-Grained Complexity}},
+  booktitle =	{13th Innovations in Theoretical Computer Science Conference (ITCS 2022)},
+  pages =	{3:1--3:25},
+  series =	{Leibniz International Proceedings in Informatics (LIPIcs)},
+  ISBN =	{978-3-95977-217-4},
+  ISSN =	{1868-8969},
+  year =	{2022},
+  volume =	{215},
+  editor =	{Braverman, Mark},
+  publisher =	{Schloss Dagstuhl -- Leibniz-Zentrum f{\"u}r Informatik},
+  address =	{Dagstuhl, Germany},
+  URL =		{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2022.3},
+  URN =		{urn:nbn:de:0030-drops-155991},
+  doi =		{10.4230/LIPIcs.ITCS.2022.3},
+  annote =	{Keywords: Fine-grained complexity, Merlin-Arthur proofs}
+}</pre>
+              </details>
+            </div>
           </li>
         </ul>
       </section>
-<section id="industry">
+
+      <section id="industry">
         <h2>Selected Projects</h2>
         <ul>
           <li>
             <span class="role-title">Applied Scientist Intern, Amazon</span><br>
             <span class="meta">East Palo Alto, May–Aug. 2025.</span><br>
             Designed Lexicure, a leakage-free encrypted lexical search protocol with improved communication tradeoffs and new secure primitives for higher-degree arithmetic.<br>
-            With Tal Wagner, Shai Halevi and Nina Mishra. <span class="meta">Manuscript under submission.</span>
+            With <a class="author-link" href="https://talwagner.github.io/" target="_blank" rel="noopener">Tal Wagner</a>, <a class="author-link" href="https://shaih.github.io/" target="_blank" rel="noopener">Shai Halevi</a> and <a class="author-link" href="https://theory.stanford.edu/~nmishra/" target="_blank" rel="noopener">Nina Mishra</a>. <span class="meta">Manuscript under submission.</span>
           </li>
           <li>
             <span class="role-title">Open Source Software Development Intern, PyTorch</span><br>
             <span class="meta">Facebook, New York, May–Aug. 2019.</span><br>
             Designed and implemented a C++ API for PyTorch Autograd, introducing native C++ support for automatic differentiation.<br>
-            <a href="https://github.com/pytorch/pytorch/issues?q=author%3Amalvika2147" target="_blank" rel="noopener">PyTorch contributions</a>
+            <a class="meta-link" href="https://github.com/pytorch/pytorch/issues?q=author%3Amalvika2147" target="_blank" rel="noopener">PyTorch contributions</a>
           </li>
         </ul>
-        <p class="subtle cv-note">For additional research, software engineering, outreach, and teaching experience, see my <a href="cv.pdf">CV</a>.</p>
+        <p class="subtle cv-note">For additional research, software engineering, outreach, and teaching experience, see my <a href="cv.pdf" target="_blank" rel="noopener" download="MalvikaJoshi_CV_2026.pdf">CV</a>.</p>
       </section>
     </main>
 
