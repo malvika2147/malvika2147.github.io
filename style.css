@@ -7,6 +7,7 @@
     --text: #f3f3ec;
     --muted: #c8c8bd;
     --subtle: #9d9d92;
+    --venue: #b3b3a8;
     --link: #8fbfff;
     --accent: #ec9020;
     --border: #55554c;
@@ -23,6 +24,7 @@
     --text: #222222;
     --muted: #55524a;
     --subtle: #6f6a60;
+    --venue: #5f5b52;
     --link: #1f5f99;
     --accent: #b45f06;
     --border: #d4d0c5;
@@ -284,9 +286,19 @@
     cursor: default;
   }
 
+  .meta,
+  .conference-meta,
+  .award {
+    font-size: var(--meta-font-size);
+  }
+
   .meta {
     color: var(--subtle);
-    font-size: var(--meta-font-size);
+  }
+
+  .conference-meta,
+  .award {
+    color: var(--venue);
   }
 
   .equal-contribution-note {
@@ -298,9 +310,8 @@
   }
 
   .award {
-    color: var(--subtle);
-    font-size: var(--meta-font-size);
-    font-weight: 700;
+    font-weight: 500;
+    font-style: italic;
   }
 
   .meta-link {
